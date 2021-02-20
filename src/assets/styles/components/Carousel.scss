@@ -14,3 +14,8 @@
    margin: 70px 0px;
    padding-bottom: 10px;
 }
+
+/* Para evitar que se vea el scroll en sistemas diferentes a Mac*/
+.carousel::-webkit-scrollbar{
+	display: none;
+}

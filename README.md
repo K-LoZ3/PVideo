@@ -317,7 +317,7 @@
       ~~~
       import '.../assets/styles/App';
       ~~~
-### Componente Search
+#### Componente Search
 Para el Search que sera el buscador.
 1. Creamos el archivo "search.jsx" en components y el "Search.scss" en styles/components y dentro de cada uno ponemos el codigo correspondiente.
    ~~~
@@ -342,7 +342,7 @@ Para el Search que sera el buscador.
    // ...
    ~~~
 2. Agregamos el component al contenedor "App".
-### Componente carrusel
+#### Componente carrusel
 1. Creamos un archivo Categories.jsx y .scss para los titulos de cada categoria.
    ~~~
    import React from 'react';
@@ -399,6 +399,10 @@ Para el Search que sera el buscador.
       white-space: nowrap;
       margin: 70px 0px;
       padding-bottom: 10px;
+   }
+   /* Para evitar que se vea el scroll en sistemas diferentes a Mac*/
+   .carousel::-webkit-scrollbar{
+      display: none;
    }
    ~~~
 3. Creamos los archivos "CarouselItem.jsx" y .scss para el componet CarouselItem.
@@ -516,4 +520,42 @@ Para el Search que sera el buscador.
    // ...
    ~~~
    - Se puede pasar los componentes como vemos en Categories y Carousel (Con apertura y cierre de la etiqueta del componente).
-   - Tener en cuenta que para esto hay que poner el children como parametro en la funcion del componente y usarlo justo donde queremos que se muestre el children dentro del componente.   
+   - Tener en cuenta que para esto hay que poner el children como parametro en la funcion del componente y usarlo justo donde queremos que se muestre el children dentro del componente.
+#### Componente Footer
+1. Creamos los archivos Footer.jsx y scss
+   ~~~
+   import React from 'react';
+   import '../assets/styles/components/Footer.scss';
+
+   const Footer = () => (
+      <footer className="footer">
+         <a href="/">Terminos de uso</a>
+         <a href="/">Declaración de privacidad</a>
+         <a href="/">Centro de ayuda</a>
+      </footer>
+   );
+
+   export default Footer;
+   ~~~
+   ~~~
+   .footer {
+      align-items: center;
+      background-color: #8f57fd;
+      display: flex;
+      height: 100px;
+      width: 100%;
+   }
+
+   .footer a {
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      padding-left: 30px;
+      text-decoration: none;
+   }
+
+   .footer a:hover {
+      text-decoration: underline;
+   }
+   ~~~
+2. Importamos el componente en App component.
