@@ -193,7 +193,7 @@
 #### Componente Header
 
 1. Creamos un componente header el cual importamos dentro del componente principal "App".
-   - Creamos una carpeta "containers" dentro de esta el componente "App.jsx".
+   - Creamos una carpeta "containers" y dentro de esta el componente "App.jsx".
    - En components creamos un archivo "Header.jsx" y dentro creamos el componente.
       ~~~
       import React from 'react';
@@ -239,6 +239,7 @@
       ReactDOM.render(
          <App />,
          document.getElementById('app')
+      );
       ~~~
 2. Copiamos los stilos en sass.
    - Creamos dentro de "styles" una carpeta "components" y dentro creo un archivo "Header.scss" para solo los estilos del componente Header.
@@ -322,3 +323,28 @@
       ~~~
       import '.../assets/styles/App';
       ~~~
+### Componente Search
+Para el Search que sera el buscador.
+1. Creamos el archivo "search.jsx" en components y el "Search.scss" en styles/components y dentro de cada uno ponemos el codigo correspondiente.
+   ~~~
+   import React from 'react';
+   import '../assets/styles/components/Search';
+
+   const Search = () => (
+      <section className="main">
+         <h2 className="main__title">¿Qué quieres ver hoy?</h2>
+         <input type="text" className="input" placeholder="Buscar..." />
+      </section>
+   );
+
+   export default Search;
+   ~~~
+   ~~~
+   // ...
+   import Search from '../components/Search';
+   // ...
+   <Header />
+   <Search />
+   // ...
+   ~~~
+2. Agregamos el component al contenedor "App".
