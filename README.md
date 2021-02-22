@@ -615,3 +615,17 @@ Para mejor experiencia intalar scss intellisense en VS.
    // ...
    ~~~
 3. Agregamos los demas estilos.
+#### Creamos un fake API
+Con la finalidad de tener una API para la data del proyecto creamos una de mentira con json-server.
+1. Instalamos json-server de manera global y con permisos de admin o corremos un npx para no instalarlo.
+   ~~~
+   sudo npm install json-server -g
+   ~~~
+   ~~~
+   npx json-server --watch initialState.json
+   ~~~
+2. Si lo instalamos corremos el servidor.
+   ~~~
+   json-server initialState.json
+   ~~~
+3. El archivo "initialState.json" que se usan en los comandos, es un archivo que tendra la data en json para simular las respuestas que devuelve el servidor.
