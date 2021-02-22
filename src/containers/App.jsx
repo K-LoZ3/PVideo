@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import Search from '../components/Search';
@@ -9,8 +9,19 @@ import Footer from '../components/Footer';
 
 import '../assets/styles/App.scss';
 
-const App = () => (
-   <div className="App">
+const App = () => {
+  const [ videos, setVideos ] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/initialState')
+       .then(response => response.json())
+       .then(data => setVideos(data));
+  }, []);
+
+  console.log(videos);
+
+  return (
+    <div className="App">
       <Header />
       <Search />
       <Categories title="Mi lista">
@@ -39,8 +50,9 @@ const App = () => (
         </Carousel>
       </Categories>
       <Footer />
-   </div>
-);
+    </div>
+  );
+}
 
 export default App;
 

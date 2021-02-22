@@ -629,3 +629,48 @@ Con la finalidad de tener una API para la data del proyecto creamos una de menti
    json-server initialState.json
    ~~~
 3. El archivo "initialState.json" que se usan en los comandos, es un archivo que tendra la data en json para simular las respuestas que devuelve el servidor.
+#### Usando React Hooks: useEffect y useState
+En resumen useState nos devuelve un array con dos elementos, el primero es el valor de nuesro estado, la segunda es una funcion que nos permite actualizar ese valor. El argumento que le enviamos es por defecto el valor del estado(initial state).
+El hook useEffect es una funcion que nos permite ejecutar codigo cuando se monta, desmonta o actualiza un componente. El primer argumento que recibe es una funcion que se ejecutará cuando React monte o actualice el componente, esta funcion puede devolver otra funcion que se ejecuta cuando el componente se desmonte. El segundo argumento es una array donde podemos especificar que propiedades deben cambiar para que Reacr vuelva a llamar nuestro código. Por defecto, cuando no enviamos un segundo argumento, React ejecutara useEffect cada vez que el componente o componente padre se actualice, sin enviamos un array vacio la funcion solo se ejecuta al montar o desmontar el componente.
+Esto es por facilitar las clases, podemos usarlo en una funcion evitando el constructor como inicializar los estados y el binding de las funciones. Ademas de que evitamos una cascada de elementos con los componentes y es mas facil transmitir las propiedades por los elementos.
+1. importamos desde react useEffect y useState.
+   ~~~
+   import React, { useEffect, useState } from 'react';
+   ~~~
+2. La funcion debe tener un return explicito.
+   ~~~
+   const func = () => {
+      return (
+         // ...
+      );
+   }
+   ~~~
+3. Creamos 2 variables, la primeta sera el estado y la segunda una funcion que modificara ese estado (La primera variable). Estos se crean con la funcion useState(), ella recibe elementos para inicializar el estado. Esta vez queda con un [] porque es lo que necesitamos para el estado.
+   ~~~
+   const func = () => {
+      const [ videos, setVideos ] = useState([]);
+
+      return (
+         // ...
+      );
+   }
+   ~~~
+4. Creamos la logica que modificara/establecera el estado con useEffect(). Esta traera la informacion de la API y se la pasaremos a setVideo (Que es una funcion traida por useState) que actualizara la variable/estado. useEffect recive una funcion anonima que tendra la logica necesaria para establecer el estado y un segundo parametro, este ultimo recive un parametro que se encarga de estar escuchando una propiedad que pueda cambiar y asi volver a ejecutarce. Si no queremos eso le pasamos un [].
+   ~~~
+   // ...
+   const [ videos, setVideos ] = useState([]);
+
+   useEffect(() => {
+      fetch(URL_API)
+         .then(response => response.json())
+         .then(data => setVideos(data));
+   }, []);
+   // ...
+   ~~~
+5. Para comprobar, un console.log.
+   ~~~
+   // ...
+      .then(data => setVideos(data));
+   // ...
+   console.log(videos);
+   ~~~
