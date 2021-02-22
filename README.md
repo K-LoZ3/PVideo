@@ -1,5 +1,5 @@
 # Proyecto en React
-### Obciones
+### Opciones
 - npx create-react-app Nombre-del-proyecto
 - Manual.
 ### Pasos de forma manual
@@ -559,3 +559,39 @@ Para el Search que sera el buscador.
    }
    ~~~
 2. Importamos el componente en App component.
+#### Añadiendo imagenes con Webpack
+1. Instalamos file-loader.
+   ~~~
+   npm install --save-dev file-loader
+   ~~~
+2. Añadimos una nueva regla en el "webpack.config.js".
+   ~~~
+   rules: [
+      // ...
+      {
+         test: /\.(png|gif|jpg)$/,
+         use: [
+            {
+            loader: 'file-loader',
+            options: { name: 'assets/[hash].[ext]' },
+            }
+         ],
+      },
+   ],
+   // ...
+   ~~~
+   - Con "hash" le pondremos un nombre aleatorio que se proporciona en forma de hash y con "ext" le dejamos la misma extencion que tenia.
+3. Creamos una carpeta "static" dentro de "assets" y dentro ponemos los archivos a usar (Imagenes entre otros).
+4. Importamos los archivos de las imagenes el los componentes a usar.
+   - Ejemplo.
+      ~~~
+      import React from 'react';
+      import nombreDeLaImagen from '../assets/static/nombre-del-archivo';
+
+      const Component = () => (
+      <img src={nombreDeLaImagen} />
+      );
+
+      export default Component;
+      ~~~
+5. Por ultimo, para ver varias listas del carrusel copiamos el codigo del carrusel en "App.jsx" y como queremos un titulo diferente le pasamos el nombre con un parametro / argumento al componente.
