@@ -595,3 +595,23 @@ Para el Search que sera el buscador.
       export default Component;
       ~~~
 5. Por ultimo, para ver varias listas del carrusel copiamos el codigo del carrusel en "App.jsx" y como queremos un titulo diferente le pasamos el nombre con un parametro / argumento al componente.
+#### Importando Variable y Fuentes de Google en Sass
+Para mejor experiencia intalar scss intellisense en VS.
+1. En un archivo nuevo de sass "Vars.scss" incluiremos las variables y los imports.
+   ~~~
+   @import url(https://fonts.googleapis.com/css?family=Muli&display=swap);
+
+   $theme-font: 'Muli', sans-serif;
+   $main-color: #8f57fd;
+   ~~~
+2. Importamos dentro de "App.scss"
+   ~~~
+   @import './Vars.scss';
+   body {
+      margin: 0;
+      font-family: $theme-font;
+      background: $main-color;
+   }
+   // ...
+   ~~~
+3. Agregamos los demas estilos.
