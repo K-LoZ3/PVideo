@@ -24,29 +24,25 @@ const App = () => {
     <div className="App">
       <Header />
       <Search />
-      <Categories title="Mi lista">
-        <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-        </Carousel>
-      </Categories>
-      <Categories title="Favoritos">
-        <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-        </Carousel>
+      {videos.mylist?.length > 0 &&
+        <Categories title="Mi lista">
+          <Carousel>
+            <CarouselItem />
+          </Carousel>
+        </Categories>
+      }
+      <Categories title="Tendencias">
+          <Carousel>
+            {videos.trends?.map(item =>
+                <CarouselItem key={item.id} {...item} />
+            )}
+          </Carousel>
       </Categories>
       <Categories title="Populares">
         <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
+          {videos.originals?.map(item =>
+            <CarouselItem key={item.id} {...item} />
+          )}
         </Carousel>
       </Categories>
       <Footer />

@@ -674,3 +674,42 @@ Esto es por facilitar las clases, podemos usarlo en una funcion evitando el cons
    // ...
    console.log(videos);
    ~~~
+#### Conectando la informacion de la API
+1. Miramos la API para entender que variables nos pasa.
+2. Validamos "MyList" ya que tiene un arreglo vacio, no mostramos nada si es asi de lo contrario la mostramos.
+   ~~~
+   // ...
+   {videos.mylist?.length > 0 &&
+      <Categories title="Mi Lista">
+         <Carousel>
+            <CarouselItem />
+         </Carousel>
+      </Categories>
+   }
+   // ...
+   ~~~
+3. Creamos una iteracion por cada item que arroje la API para mostrar tantos componentes de CarouselItem como sean necesarios. Le pasamos los parametros necesarios al componente, ya que son bastantes lo destructuramos y en el componente solo pedimos como parametros los que vamos a user.
+   ~~~
+   // ...
+   <Categories title="Tendencias">
+      <Carousel>
+         {videos.trends?.map(item =>
+            <CarouselItem key={item.id} {...item} />
+         )}
+      </Carousel>
+   </Categories>
+   // ...
+   ~~~
+   - El componente lo modificamos para que reciva los parametros que se destructuran.
+      ~~~
+      // ...
+      const CarouselItem = ({ cover, title, year, contentRating, duration }) => (
+         // ... 
+         <img className="carousel-item__img" src={cover} alt={title}>
+         // ...
+         <p className="carousel-item__details--title">{title}</p>
+         <p className="carousel-item__details--subtitle">{`${year} ${contentRating} ${duration} minutos`}</p>
+         // ...
+      );
+      ~~~
+   - El signo de interrogacion al final de la variable "videos.trends?.length" es para comprobar que ese variable tenga valores dentro.
