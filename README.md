@@ -4,6 +4,13 @@ Para empezar preparando todo el prof crea una rama diferente para este curso e i
    ~~~
    npm install react-router-dom --save
    ~~~
+### Atributos para los Route Objectos:
+path: la ruta en la que se renderizará el componente en forma de cadena de texto
+exact: un booleano para definir si queremos que la ruta tiene o no que ser exacta para renderizar un componente. Eg: /index !== /index/all.
+strict: un booleano para definir si queremos que el último slash sea tomado en cuenta para renderizar un componente. Eg: /index !== /index/.
+sensitive: un booleano para definir si queremos distinguir entre minúsculas y mayúsculas, y tomar esto en cuenta para renderizar un componente. Eg: /index !== /Index
+component: recibe un componente a renderizar. Crea un nuevo elemento de React cada vez. Esto causa que el componente se monte y desmonte cada vez (no actualiza).
+render: recibe un método que retorna un componente. A diferencia de component no remonta el componente.
 #### Crear nuestro archivo de Rutas
 Dentro de nuestro proyecto vamos a crear una carpeta llamada routes donde vamos a ir añadiendo las rutas que necesitemos en la aplicación.
 Las rutas que añadamos debemos definirlas con el componente Route y estas deben estar encapsuladas dentro del componente BrowserRouter del paquete de react-router-dom. Para definir una ruta con el componente Route debemos pasarle las props de:
@@ -214,3 +221,16 @@ Manejamos multiples rutas con react.
    plugins: [
    // ...
    ~~~
+#### Cntainer Register
+Hacemos lo mismo que con login.
+1. Creamos el container.
+2. Creamos los estilos y los importamos en el container.
+3. Agregamos la ruta "/regiter" al App.js.
+4. Incluimos switch en el proyecto importandolo de react-router-dom.
+   - Para asegurar que nuestras rutas solamente se rendericen con la que haga match con la url debemos encapsular las rutas dentro del componente .
+   ~~~
+   <Switch>
+   // Rutas
+   </Switch>
+   ~~~
+   - La diferencia entre poner el switch y no ponerlo es que cuando tienes el mismo path para todos solamente toma el primero y lo renderiza.
