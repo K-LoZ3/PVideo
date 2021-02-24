@@ -778,3 +778,13 @@ Es una manera de trabajar con TS. No hay que confundir los propTypes con validac
    }
 
    export default CarouselItem;
+   ~~~
+   - Por defecto, enviar todas nuestras props es opcional, pero con los propTypes podemos especificar cuáles props son obligatorias para que nuestro componente funcione correctamente con el atributo isRequired.
+      ~~~
+      Component.propTypes = {
+         name: PropTypes.string.isRequired, // obligatorio
+         lastName: PropTypes.string.isRequired, // obligatorio
+         age: PropTypes.number, // opcional,
+         list: PropTypes.array, // opcional
+      };
+      ~~~

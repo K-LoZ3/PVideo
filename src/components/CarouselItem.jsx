@@ -20,11 +20,11 @@ const CarouselItem = ({ cover, title, year, contentRating, duration }) => (
 );
 
 CarouselItem.propTypes = {
-   cover: PropTypes.string,
-   title: PropTypes.string,
-   year: PropTypes.number,
-   contentRating: PropTypes.string,
-   duration: PropTypes.number,
+   cover: PropTypes.string.isRequired,
+   title: PropTypes.string.isRequired,
+   year: PropTypes.number.isRequired,
+   contentRating: PropTypes.string.isRequired,
+   duration: PropTypes.number.isRequired,
 }
 
 export default CarouselItem;
