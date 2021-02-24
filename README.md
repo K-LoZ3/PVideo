@@ -788,3 +788,34 @@ Es una manera de trabajar con TS. No hay que confundir los propTypes con validac
          list: PropTypes.array, // opcional
       };
       ~~~
+## Nuevo curso de React router y redux
+Para empezar preparando todo el prof crea una rama diferente para este curso e instalamos. "react-router-dom"
+   ~~~
+   npm install react-router-dom --save
+   ~~~
+#### Crear nuestro archivo de Rutas
+Dentro de nuestro proyecto vamos a crear una carpeta llamada routes donde vamos a ir añadiendo las rutas que necesitemos en la aplicación.
+Las rutas que añadamos debemos definirlas con el componente Route y estas deben estar encapsuladas dentro del componente BrowserRouter del paquete de react-router-dom. Para definir una ruta con el componente Route debemos pasarle las props de:
+path para indicar la url.
+exact si queremos que funcione única y exactamente con la url que le digamos.
+component para indicarle el componente que va a renderizar.
+1. Creamos un archivo "App.js" en este pondremos la logica de react para las rutas.
+   ~~~
+   import React from 'react';
+   import { BrowserRouter, Route } from 'react-router-dom';
+   import Home from '../containers/Home';
+
+   const App = () => (
+      <BrowserRouter>
+         <Route exact path="/" component={Home} />
+      </BrowserRouter>
+   );
+
+   export default App;
+   ~~~
+2. Renombramis el componente App creado antes por para usarlos desde este archivo.
+3. Cambiamos el import en index.js para que reiba como componente principal a este archivo.
+   ~~~
+   import App from './routes/App';
+   // ...
+   ~~~
