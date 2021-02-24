@@ -759,3 +759,22 @@ Son enpaquetado de funciones hooks personalizadas. Esto para separar la logica
          <Footer />
    // ...
    ~~~
+#### PropTypes
+Es una manera de trabajar con TS. No hay que confundir los propTypes con validación de datos. Esto solo nos permite asegurarnos que la data que se esta consumiendo es la correcta y evitar así un posible error. Si bien no son una herramienta que obligue al desarrollador a cumplir la validación, si nos ayuda a entender mejor el código.
+1. instalamos prop-types con npm.
+   ~~~
+   npm install --save prop-types
+   ~~~
+2. Inportamos en el componente a usar y lo implementamos. CarouselItem.propTypes va con p minuscula porque esa es la convencion.
+   ~~~
+   import PropTypes from 'prop-types';
+   // ...
+   CarouselItem.propTypes = {
+      cover: PropTypes.string,
+      title: PropTypes.string,
+      year: PropTypes.number,
+      contentRating: PropTypes.string,
+      duration: PropTypes.number,
+   }
+
+   export default CarouselItem;
