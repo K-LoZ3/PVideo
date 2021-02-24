@@ -713,3 +713,49 @@ Esto es por facilitar las clases, podemos usarlo en una funcion evitando el cons
       );
       ~~~
    - El signo de interrogacion al final de la variable "videos.trends?.length" es para comprobar que ese variable tenga valores dentro.
+#### Custom Hooks
+Son enpaquetado de funciones hooks personalizadas. Esto para separar la logica
+1. Separamos en una carpeta "hooks" dentro de "src" nuestros Custom Hooks. Estos por convencion llevan use seguido del nombre del hooks (useInitialState.js).
+2. Pasamos a este la logica de hooks junto con los imports necesarios.
+   ~~~
+   import { useState, useEffect } from 'react';
+
+   const useInitialState = API => {
+      const [ video, setVideo ] = useState([]);
+      useEffect(() => {
+         fetch(API)
+            .then(response => response.json())
+            .then(data = setVideo(data));
+      }, []);
+      return videos;
+   }
+
+   export default useInitialState;
+   ~~~
+3. Usamos el hooks en el componente que se necesita y manejamos los datos que arroja.
+   ~~~
+   // ...
+   import useInitialState from '../hooks/useInitialState';
+
+   const API = 'http://localhost:3000/initialState';
+
+   // ...
+   const initialState = useInitialState(API); // Usando el hooks para recivir los datos.
+   const categories = Object.keys(initialState);
+
+   return initialState.length === 0 ? <h1>Loading...</h1> : (
+      <div className="App">
+         <Search />
+         {categories.map(categorie =>
+         initialState[categorie]?.length > 0 &&
+            <Categories key={categorie} title={categorie}>
+               <Carousel>
+               {initialState[categorie].map(item => 
+                  <CarouselItem key={item.id} {...item} />
+               )}
+               </Carousel>
+            </Categories>
+         )}
+         <Footer />
+   // ...
+   ~~~
