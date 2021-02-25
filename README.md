@@ -236,3 +236,7 @@ Hacemos lo mismo que con login.
    - La diferencia entre poner el switch y no ponerlo es que cuando tienes el mismo path para todos solamente toma el primero y lo renderiza.
 #### Container NotFound
 Este es el componente que se mostrara cuando no se encuentre la ruta dentro del proyecto. Los pasos son los mismos salvo que la ruta no tendra path ni sera exact, de esta manera este coponente pasara cuando se coloque alguna ruta que no este expecificada. Debemos añadir esta ruta al final del Switch para que sea el caso por default.
+#### Componente Layout
+Este componente se encargara de presentar el header y el footer simpre para que no haga falta importarlos en cada componente.
+1. Lo creamos y dentro le ponemos la funcionalidad de recibir un hijo.
+2. lo importamos dentro de App.js y el hijo que recivira sera el Switch component con las rutas que manejara.
