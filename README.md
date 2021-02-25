@@ -240,3 +240,7 @@ Este es el componente que se mostrara cuando no se encuentre la ruta dentro del 
 Este componente se encargara de presentar el header y el footer simpre para que no haga falta importarlos en cada componente.
 1. Lo creamos y dentro le ponemos la funcionalidad de recibir un hijo.
 2. lo importamos dentro de App.js y el hijo que recivira sera el Switch component con las rutas que manejara.
+#### Manejando enlaces y configuraciones
+Esto es con el Componente Link de "react-router-dom".El componente es similar a un elemento ya que nos permite navegar dentro de la aplicación, pero sin la necesidad de tener que recargar la página. Para indicarle el destino a simplemente debemos pasarle la prop to='/mi-enlace'.
+1. Importamos Link en cada componente que se necesite.
+2. Cada enlace se cambiara por este componente y su ruta.
