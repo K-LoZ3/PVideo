@@ -234,3 +234,5 @@ Hacemos lo mismo que con login.
    </Switch>
    ~~~
    - La diferencia entre poner el switch y no ponerlo es que cuando tienes el mismo path para todos solamente toma el primero y lo renderiza.
+#### Container NotFound
+Este es el componente que se mostrara cuando no se encuentre la ruta dentro del proyecto. Los pasos son los mismos salvo que la ruta no tendra path ni sera exact, de esta manera este coponente pasara cuando se coloque alguna ruta que no este expecificada. Debemos añadir esta ruta al final del Switch para que sea el caso por default.
