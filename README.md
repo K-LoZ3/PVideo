@@ -317,3 +317,60 @@ mapDispatchToProps: es un objeto con las distintas funciones para ejecutar una a
    export default reducer;
    ~~~
    Este es sencillo puesto que no se tenemos ni acciones ni nada que necesite cambiar el store. Retornamos el estado inicial tal cual lo recibimos.
+#### Creando los reducers y actions
+Un action de Redux va a contener dos elementos:
+type: para indicar la acción que se va a ejecutar.
+payload: es la información que estamos mandando al reducer.
+Dentro de los reducers usaremos un switch para separar la lógica por cada tipo de acción que tendremos en Redux.
+1. Comenzamos con crear el action. Este debe ser una funcion recibe el cambio que se quiere hacer y retorna un objeto con dos campos. El primero "type" describe la accion y el segundo "payload" guarda el valor del cambio que se quiere hacer.
+   ~~~
+   export const setFavorite = payload => ({
+      type: 'SET_FAVORITE',
+      payload,
+   });
+   ~~~
+2. Modificamos el reducer. Por lo general tendra un switch que verificara dentro de "action.type" que se quiere hacer.
+De esta manera pasaremos por una logica que comprobara en distintos casos cual ejecutar. En el caso que queremos debemos retornar un objeto con todo el estado "inicial" destructurado y como segundo argumento pisamos el campo que se quiere modificar y le pasamos el payload para agregar lo nuevo. Como myList es un array, destructuramos todo ese array para que tenga todo lo anterior y le pasamos el payload para que se agrege otro item, como si  fuera una suma de la misma variable (i = i + 1;)
+   ~~~
+   const reducer = (state, action) => {
+      switch (action.type) {
+         case 'SET_FAVORITE':
+            return {
+               ...state,
+               myList: [...state.myList, action.payload],
+            } // No hace falta el breack porque estamos retornando.
+         default:
+            return state;
+      }
+   }
+
+   export default reducer;
+   ~~~
+3. En el componente que se ejecutaran la acciones, en este caso sera en "CarouselItem" ya que aqui es donde esta el boton de agregar, se usara el action, para esto conectamos el componente con "connect" pero esta vez como el item se le pasa por parametro al componente no necesitamos pasar el primer parametro de connect. Solo pasamos el segundo parametro que sera un objeto con la funcion del action que se va a usar.
+4. Esta al conectarla ya se pasa por medio de props y la podremos usar. Para esto creamos otra funcion que tendrea la logica que hara que reciba el payload y nada mas.
+   ~~~
+   // ...
+   const CarouselItem = props => {
+   const { id, cover, title, year, contentRating, duration } = props;
+   const handleSetFavorite = () => {
+      props.setFavorite({
+         id, cover, title, year, contentRating, duration
+      });
+   }
+   return (
+      <div className="carousel-item">
+   // ...
+   ~~~
+5. Esta funcion "handleSetFavorite" sera la que usemos en el boton.
+   ~~~
+   // ...
+   <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" /> 
+   <img 
+      className="carousel-item__details--img" 
+      src={plusIcon} 
+      alt="Plus Icon"
+      onClick={handleSetFavorite}
+   />
+   // ...
+   ~~~
+   Sucede que esta funcion queda "seteada" con los datos al crear el componente esperando que el boton sea preccionado.
