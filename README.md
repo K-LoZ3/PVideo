@@ -374,3 +374,49 @@ De esta manera pasaremos por una logica que comprobara en distintos casos cual e
    // ...
    ~~~
    Sucede que esta funcion queda "seteada" con los datos al crear el componente esperando que el boton sea preccionado.
+   Creamos luego el boton de borrado. Este sera igual que el anterior solo que tendra un action diferente con el "type" 'DELETE_FAVORITE' y un case con este type en el reducer que se encargara de eliminar del array myList este item. Con este solo pasamos el ide al action ya que solo es para identificar cual sera borrado y lo pasamos a la funcion handle de este action que se crea en el componente, ademas de que en el onClick tambien debemos pasar el valor que recibe.
+   ~~~
+   const handleDeleteFavorite = itemId => {
+      props.deleteFavorite(itemId);
+   }
+   // ...
+   onClick={() => handleDeleteFavorite(id)}
+   ~~~
+   O tambien podemos hacerlo de otra manera ya que el id es recivido en los props y se setearia este valor dentro del handle. No estoy seguro de si es segura pero esta.
+   ~~~
+   const handleDeleteFavorite = () => {
+      props.deleteFavorite(id);
+   };
+   // ...
+   onClick={handleDeleteFavorite} 
+   ~~~
+   validamos que no se dupliquen items al agregarlos a myList.
+   ~~~
+   case 'SET_FAVORITE':
+      return {
+         ...state,
+         myList: [...state.myList.filter(item => item.id !== action.payload.id), action.payload],
+      }
+   ~~~
+   En el reducer para evitar duplicados. Otro ejemplo puede ser.
+   ~~~
+   case 'SET_FAVORITE':
+      const exist = state.mylist.find(item => item.id === action.payload.id)
+      if (exist) return state;
+      return {
+        ...state,
+        mylist: [...state.mylist, action.payload]
+      }
+   ~~~
+   Otro ejemplo puede ser.
+   ~~~
+   case 'SET_FAVORITE':
+      return state.myList.find(item => item.id === action.payload.id)
+         ? state
+         : {
+            ...state,
+            myList: [...state.myList, action.payload]
+         }
+   ~~~
+6. corregimos que tanto el boton para borrar como el de agregar solo se vean si es necesario. En el caso de myList solo se debe ver el de borrar y en los otros el de agregar.
+   - Validamos con in buleano. En el componente desde home le pasamos al CarouselItem "isList" como argumento sin nada para que sea un boleano establecido como verdadero, si quisieramos que estuviera en falso seria "isList={false}" de esta manera luego con una condicional se valida que boton mostrar si este es falso o verdadero.
