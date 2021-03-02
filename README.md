@@ -420,3 +420,61 @@ De esta manera pasaremos por una logica que comprobara en distintos casos cual e
    ~~~
 6. corregimos que tanto el boton para borrar como el de agregar solo se vean si es necesario. En el caso de myList solo se debe ver el de borrar y en los otros el de agregar.
    - Validamos con in buleano. En el componente desde home le pasamos al CarouselItem "isList" como argumento sin nada para que sea un boleano establecido como verdadero, si quisieramos que estuviera en falso seria "isList={false}" de esta manera luego con una condicional se valida que boton mostrar si este es falso o verdadero.
+#### Crear Formulario de Login
+Creamos la funcionalidad de recibir los datos del formulario.
+De esta manera podemos recivir los datos que se envian del formulario. Esto lo aremos con react hooks (useState).
+1. Importamos useState de react y creamos 2 constantes (from, setValues), la primera sera el formulario y la segunda la funcion para modificar la primera. Las inicializamos con useState y como valor inicial le pasamos a useState un objeto con un parametro email vacio.
+   ~~~
+   const Login = () => {
+      const [from, setValues] = useState({
+         email: '',
+      });
+      return (
+         // ...
+      )
+   }
+   ~~~
+2. Preparamos el formulario para manejar los cambios en el formulario y el envio de estos.
+   - Creamos una funcion para el manejo de los cambios.
+      ~~~
+      const handleInput = event => {
+         setValues({
+            ...form,
+            [event.target.name]: event.target.value,
+         });
+      }
+      ~~~
+      Aqui estamos usando setValues para que actualice la informacion que se esta escribiendo el el formulario y se guardo en nuestra variable form. Con ([...]: ...) lo que estamos haciendo es que de forma dinamica estamos buscando el nombre del formulario y le etamos pasando el valor correspondiente para luego agregarla al form.
+      - Le ponemos un name a cada input para que lo anterior funcione y le agregamos esta funcion para que se ejecute en cada cambio del input.
+         ~~~
+         // ...
+         <input 
+            name="email"
+            className="input"
+            type="text"
+            placeholder="Correo"
+            onChange={handleInput}
+         />
+         <input 
+            name="password"
+            className="input"
+            type="password"
+            placeholder="Contraseña"
+            nChange={handleInput}
+         />
+         // ...
+         ~~~
+         Estamos omitiendo el manejo del password porque eso es de otro curso.
+3. Creamos la funcion que se encagara de enviar los cambios.
+   - Cramos la funcion handleSubmit y dentro eliminamos la funcionalidad por defecto de html para el envio de formularios.
+   ~~~
+   const handleSubmit = event => {
+      event.preventDefault();
+      console.log(form);
+   }
+   ~~~
+   El console.log es para comprobar que si envia los datos. Aqui dontro se pone la logica para enviarlos.
+   - En la etiqueta form, en el onSubmit incluimos esta funcion.
+   ~~~
+   <form className="login__container--form" onSubmit={handleSubmit}>
+   ~~~
