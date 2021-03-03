@@ -487,3 +487,9 @@ Con esta funcionalidad mandamos los datos recojidos con el formulario.
    props.history.push('/');
    ~~~
 Con esto tenemos todo el login connectado al store y podemos enviar el objeto ('form' generado por el react hooks) a una variable 'user' dentro de este.
+#### Creando un Servicio para Gravatar
+Muchas veces la mejor opción no es descargar un paquete de npm ya que podemos ver la documentación, entender cómo funciona y nosotros implementar el código necesario para nuestro caso, ya que instalar todo el paquete puede volver más pesado nuestro proyecto.
+Para nuestro servicio que llamará a Gravatar vamos a crear la carpeta utils y dentro añadir el archivo gravatar.js.
+2 finalidades:
+- La primera nos permite entender como no debemos de depender de paquetes de terceros solo por que los necesitamos en nuestro proyecto.
+- Segunda, nos permite añadirle una imagen al proyecto cuando iniciamos sesión. Gravatar es un servicio que sirve para las imágenes de perfil asociadas a un correo electrónico, muchas páginas utilizan Gravatar en lugar de un servidor propio para jalar esa información.
