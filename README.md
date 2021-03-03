@@ -478,3 +478,12 @@ De esta manera podemos recivir los datos que se envian del formulario. Esto lo a
    ~~~
    <form className="login__container--form" onSubmit={handleSubmit}>
    ~~~
+#### Formulario de Login con Redux
+Con esta funcionalidad mandamos los datos recojidos con el formulario.
+1. Conectamos el Login componen y creamos los action y reducer. ('LOGIN_REQUEST'). Con el fin de tener el objeto user al final de todo cuando se envien los valores.
+2. Implementamos el action dentro de handleSubmit.
+3. Redirecionamos la pagina al Home con la ayuda de history y su metodo push. Este esta incluido ya que el proyecto esta envielto en el BrowserRouter.
+   ~~~
+   props.history.push('/');
+   ~~~
+Con esto tenemos todo el login connectado al store y podemos enviar el objeto ('form' generado por el react hooks) a una variable 'user' dentro de este.
