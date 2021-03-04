@@ -493,3 +493,32 @@ Para nuestro servicio que llamará a Gravatar vamos a crear la carpeta utils y d
 2 finalidades:
 - La primera nos permite entender como no debemos de depender de paquetes de terceros solo por que los necesitamos en nuestro proyecto.
 - Segunda, nos permite añadirle una imagen al proyecto cuando iniciamos sesión. Gravatar es un servicio que sirve para las imágenes de perfil asociadas a un correo electrónico, muchas páginas utilizan Gravatar en lugar de un servidor propio para jalar esa información.
+#### Uso de gravatar en nuestro proyecto
+Esto nos permite poner la imagen de usuario en donde esta el logo de iniciar seccion. Para implementarla conectamos Header al store para pedirle la info de 'User', informacion que almacenamos desde login cuando le damos en iniciar sesion, luego usamos la funcion gravatar que creamos para pedir la url de la imagen a la pagina de gravatar y directamente la ponemos en src de la etiqueta img.
+Para este ejemplo usamos una validacion para poner la imagen de gravatar o el logo de login si no se ha iniciado sesion.
+Aprovechando la validacion del logo/imagen-perfil, creamos una validacion para que se muestre el nombre de usuario si se inicio sesion y que no se muestre el link de iniciar sesion del header.
+   ~~~
+   <div className="header__menu">
+      <div className="header__menu--profile">
+         {hasUser 
+            ? <img src={gravatar(user.email)} alt={user.email} />
+            : <img src={userIcon} alt="" />
+         }
+         <p>Perfil</p>
+      </div>
+      <ul>
+         {hasUser 
+            ? <li><a href="/">{user.email}</a></li>
+            : null
+         }
+         {hasUser
+            ? null
+            : <li>
+               <Link to="/login">
+                  Iniciar Sesión
+               </Link>
+            </li>
+         }
+      </ul>
+   </div>
+   ~~~

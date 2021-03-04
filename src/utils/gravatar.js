@@ -7,7 +7,7 @@ const gravatar = email => {
     Ya que no se pueden mandar @ debemos convertir el email
     a formato binario
   */
-  const hast = md5(formatEmail, {encoding: "binary"});
+  const hash = md5(formatEmail, {encoding: "binary"});
   return `${base}${hash}`;
 }
 
