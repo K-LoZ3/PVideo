@@ -522,3 +522,21 @@ Aprovechando la validacion del logo/imagen-perfil, creamos una validacion para q
       </ul>
    </div>
    ~~~
+#### Validación para LogIn LogOut
+Para validar el lo que hacemos es crear el action y reducer que se encargaran de borrar el usuario de la variable user que se crea en el store cuando se inicia sesion (Pasamos un {} objeto vacio). Para el boton de cerrar sesion con una etiqueta a en el onClick usamos el action.
+   ~~~
+   {hasUser
+      ? <li>
+            <Link
+               to="#logout"
+               onClick={handleLogout}>
+               Cerrar sesion
+            </Link>
+         </li>
+      : <li>
+         <Link to="/login">
+            Iniciar Sesión
+         </Link>
+      </li>
+   }
+   ~~~

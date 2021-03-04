@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { logoutRequest } from '../actions';
 import gravatar from '../utils/gravatar';
 import '../assets/styles/components/Header.scss';
 
@@ -11,6 +13,10 @@ const Header = props => {
    const { user } = props;
 
    const hasUser = Object.keys(user).length > 0;
+
+   const handleLogout = () => {
+      props.logoutRequest({});
+   }
 
    return (
       <header className="header">
@@ -31,7 +37,13 @@ const Header = props => {
                   : null
                }
                {hasUser
-                  ? null
+                  ? <li>
+                        <Link
+                           to="#logout"
+                           onClick={handleLogout}>
+                           Cerrar sesion
+                        </Link>
+                     </li>
                   : <li>
                      <Link to="/login">
                         Iniciar Sesión
@@ -50,4 +62,14 @@ const mapStateToProps = state => {
    }
 }
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = {
+   logoutRequest,
+}
+
+// Tipos en react. Para validar que el tipo que usamos es el correcto.
+Header.propTypes = {
+   user: PropTypes.object,
+   logoutRequest: PropTypes.func,
+ };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
