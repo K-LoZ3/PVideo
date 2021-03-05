@@ -544,3 +544,44 @@ Para validar el lo que hacemos es crear el action y reducer que se encargaran de
 Incluimos la logica para el formulario de registro maneje los datos del formulario con hooks, estos sean almacenados en una variable form para poderlos usarlos mejor.
 #### Register con Redux
 Implementamos redux dentro del Register Component para que de esta manera los datos sean enviados al store y puedan ser usados por los demas componentes.
+#### Vista general del player
+1. Creamos Player.jsx dentro de containers. Creamos la logica de estructura y scss de nuestro player.
+   ~~~
+   import React from 'react';
+   import { Link } from 'react-router-dom';
+   import '../assets/styles/components/Player.scss'
+
+   const Player = () => {
+      return (
+         <div className="Player">
+            <video controls autoPlay>
+               <source src="" type="vidoe/mp4" />
+            </video>
+            <div className="Player-back">
+               <Link to="/">
+                  <button type="button">
+                     Regresar
+                  </button>
+               </Link>
+            </div>
+         </div>
+      );
+   }
+
+   export default Player;
+   ~~~
+2. En routes añadimos una nueva ruta para nuestro player y le pasamos un id (es decir, una propiedad a nuestra ruta).
+   ~~~
+   <Route exact path="/player/:id" component={Player} />
+   ~~~
+3. Hacemos Link al icon de play que se encuentra en carousel Item.
+   ~~~
+   <Link to={/player/${id}}>
+      <img
+         className="carousel-item__details–img"
+         src={playIcon}
+         alt=“Play Icon”
+      />
+   </Link>
+   ~~~
+De esta manera creamos una url por cada uno de los elementos que se esta iterando.
