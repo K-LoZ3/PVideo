@@ -668,3 +668,21 @@ En esta clase incluimos la logica necesario para reproducir el video. Este viene
       }
    ~~~
    De esta manera buscamos en trends y en original si esta el id, y si esta en alguno, que lo establesca en playing, de lo contrario retornamos un [].
+#### Validaciones del header.
+Validamos la clase que va a tener el header dependiendo de de la ubicacion de donde se llama (Login, Register o Home). De esta manera le podemos poner el color necesario para que quede bien. Esta clase se establece con un paquete llamado "classnames". Con este paquete se valida un booleano y se establese un string con el nombre de la variable buleano para que sea pasado a la clase del header.
+   ~~~
+   import classNames from 'classnames';
+   // ...
+   const headerClass = classNames('header', {
+      isLogin,
+      isRegister,
+   });
+
+   return (
+      <header className={headerClass}>
+         <Link to="/">
+            <img className="header__img" src={logo} alt="Platzi Video" />
+         </Link>
+   // ...
+   ~~~
+   Solo Las variables que sean true se estableceran en el string "headerClass". Ya con esto solo se usaria el Header fuera de Layout component y en cada componente se usaria con el booleano necesario.
