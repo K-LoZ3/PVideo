@@ -541,4 +541,6 @@ Para validar el lo que hacemos es crear el action y reducer que se encargaran de
    }
    ~~~
 #### Register
-Incluimos la logica para el formulario de registro. Solo lo necesario para que este incluya los valores del input en el store y puedan ser vistos por los demas componentes al igual que se hizo con login.
+Incluimos la logica para el formulario de registro maneje los datos del formulario con hooks, estos sean almacenados en una variable form para poderlos usarlos mejor.
+#### Register con Redux
+Implementamos redux dentro del Register Component para que de esta manera los datos sean enviados al store y puedan ser usados por los demas componentes.

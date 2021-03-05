@@ -33,7 +33,7 @@ const Header = props => {
             </div>
             <ul>
                {hasUser 
-                  ? <li><a href="/">{user.email}</a></li>
+                  ? <li><a href="/">{user.name}</a></li>
                   : null
                }
                {hasUser
@@ -70,6 +70,6 @@ const mapDispatchToProps = {
 Header.propTypes = {
    user: PropTypes.object,
    logoutRequest: PropTypes.func,
- };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
