@@ -617,3 +617,54 @@ Lo que hicimos antes fue enviar a nuestro player un id que se obtiene del render
    const { id } = props.match.params;
    ~~~
 Esto lo hace Router en el momento que nosotors generamos la ruta player:id, de esta manera obtenemos el id desde los props para poder usar este y buscar el video luego.
+#### Terminando de detallar nuestro player
+En esta clase incluimos la logica necesario para reproducir el video. Este viene desde una api, por lo tanto necesitamos la url de cada video, estas url las tenemos en el json de initialState. 
+1. Por medio de redux, pedimos el stado de playing para ver si tenemos, o no, un video incluido, o sea, un video en reproducion (Creamos action "getVideoSource" y reducer).
+2. Pasamos la url de este video que se encuentra en el campo source al src del video para que se muestre en pantalla.
+   ~~~
+   <video controls autoPlay>
+      <source src={props.playing.source} type="video/mp4" />
+   </video>
+   ~~~
+3. Validamos que hay video dentro del api/initialState/json, mostrando el NotFound component si no existe o el player component de lo contrario.
+   ~~~
+   // ...
+   const hasPlaying = Object.keys(props.playing).length > 0;
+
+   return hasPlaying ? (
+      <div className="Player">
+         <video controls autoPlay>
+            <source src={props.playing.source} type="video/mp4" />
+         </video>
+         <div className="Player-back">
+            <button type="button" onClick={() => props.history.goBack()}>
+               Regresar
+            </button>
+         </div>
+      </div>
+   ) : <NotFound />;
+   // ...
+   ~~~
+4. Buscamos el id dentro de la api/initialState/json/store y lo incluimos al playing, esto porque al entrar en esta pagina el objeto playing esta basio ya que no tenemos la logica para que se agrege al precionar el boton play en el item. Cuando lo encuentre por medio del action "getVideoSource" y su reducer lo incluimos al playing en el store.
+   - En Player component.
+   ~~~
+   const hasPlaying = Object.keys(props.playing).length > 0;
+
+   useLayoutEffect(() => {
+      props.getVideoSource(id);
+   }, []);
+
+   return hasPlaying ? (
+   ~~~
+   Usamos useLayoutEffect de 'react', ya que este se ejecuta de maner sincrona. Lo que impide que mientras busqua el video y lo carga se vea el NotFound component ya que se sigue ejecuntando el codigo de no usar useEffect que es asincrono.
+   - En reducer.
+   ~~~
+   case 'GET_VIDEO_SOURCE':
+      return {
+         ...state,
+         playing: state.trends.find(item => item.id === Number(action.payload))
+            || state.originals.find(item => item.id === Number(action.payload))
+            || [],
+      }
+   ~~~
+   De esta manera buscamos en trends y en original si esta el id, y si esta en alguno, que lo establesca en playing, de lo contrario retornamos un [].
