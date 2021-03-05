@@ -16,7 +16,7 @@ const Home = ({ myList, trends, originals }) => {
   return (
     <>
       <Header />
-      <Search />
+      <Search isHome />
       {categories.map((categorie, i) =>
         list[i]?.length > 0 &&
           <Categories key={i} title={categorie}>

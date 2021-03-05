@@ -686,3 +686,5 @@ Validamos la clase que va a tener el header dependiendo de de la ubicacion de do
    // ...
    ~~~
    Solo Las variables que sean true se estableceran en el string "headerClass". Ya con esto solo se usaria el Header fuera de Layout component y en cada componente se usaria con el booleano necesario.
+#### Validaciones de UI
+Agregamos validaciones para la clase del input del componente Search ya que si lo colocamos sin validacion entra en conflicto con los otros input poniendoles esta clase. La validacion es solo para el Home "isHome" se pasa como booleano al Search component y de esta manera con classnames se puede establecer esta clase para asignarle el width necesario.
