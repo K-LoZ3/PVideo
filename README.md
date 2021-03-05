@@ -585,3 +585,35 @@ Implementamos redux dentro del Register Component para que de esta manera los da
    </Link>
    ~~~
 De esta manera creamos una url por cada uno de los elementos que se esta iterando.
+#### Arreglando la funcionalidad del player
+Lo que hicimos antes fue enviar a nuestro player un id que se obtiene del render que se hace de los elementos para cada uno de los items del carousel y de esta manera transmitimos el id a nuestra url y ahi capturamos este valor para saber cual es el video que corresponde a ese id y poder presentarlo en el reproductor.
+   - En el boton del item.
+   ~~~
+   <Link to={`/player/${id}`}>
+   ~~~
+   - En el route de las rutas.
+   ~~~
+   <Route exact path="/player/:id" component={Player} />
+   ~~~
+1. En el boton agregamos la funcion que nos regresará a la pagina de donde veniamos, esta funcion esta encapsulada en el browser router.
+   ~~~
+   <button type="button" onClick={() => props.history.goBack()}>
+   ~~~
+2. Debemos reparar el compilado cuando cargamos la ruta de un video directamente porque no lo lee por defecto el bundle.js. No lo encuentra en la ruta desde donde esta ya que si llamamos la ruta del video directamente, tomara esta ruta como la principal y buscara en esta el bundle.js. Por lo tanto en webpack en output agregamos esta  confiuguracion que nos dice que lo lea en el publicPath.
+   ~~~
+   // ...
+   output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.js',
+      publicPath: '/', // <--- Esta linea.
+   },
+   resolve: {
+      extensions: ['.js', '.jsx'],
+   },
+   // ...
+   ~~~
+3. En el componente player debemos obtener el id que recibimos por parametros
+   ~~~
+   const { id } = props.match.params;
+   ~~~
+Esto lo hace Router en el momento que nosotors generamos la ruta player:id, de esta manera obtenemos el id desde los props para poder usar este y buscar el video luego.
