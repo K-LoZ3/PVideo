@@ -540,3 +540,5 @@ Para validar el lo que hacemos es crear el action y reducer que se encargaran de
       </li>
    }
    ~~~
+#### Register
+Incluimos la logica para el formulario de registro. Solo lo necesario para que este incluya los valores del input en el store y puedan ser vistos por los demas componentes al igual que se hizo con login.
