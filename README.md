@@ -688,3 +688,60 @@ Validamos la clase que va a tener el header dependiendo de de la ubicacion de do
    Solo Las variables que sean true se estableceran en el string "headerClass". Ya con esto solo se usaria el Header fuera de Layout component y en cada componente se usaria con el booleano necesario.
 #### Validaciones de UI
 Agregamos validaciones para la clase del input del componente Search ya que si lo colocamos sin validacion entra en conflicto con los otros input poniendoles esta clase. La validacion es solo para el Home "isHome" se pasa como booleano al Search component y de esta manera con classnames se puede establecer esta clase para asignarle el width necesario.
+#### Debug con Redux Devtools
+Para una mejor forma de ver como redux esta manejando los estados de la app esta herramienta es una buena opcion.
+1. En el index principal donde se crea el store, creamos una constante que le pasaremos a la funcion que crea el store.
+   ~~~
+   // ...
+   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+   const store = createStore(reducer, initialState, composeEnhancers);
+
+   ReactDOM.render(
+   // ...
+   ~~~
+2. Instalamos la extencion en el navegador (Redux Devtools).
+###### Reto de Serach component.
+1. Cree un action y un reducer que se encargan de llenar un arreglo "search" dentro del store con los item que coinciden con la busqueda.
+   ~~~
+   case 'SEARCH_REQUEST':
+      if(action.payload === ''){
+         return {
+            ...state,
+            search: [],
+         };
+      }
+      const list = [...state.trends, ...state.originals];
+      return {
+         ...state,
+         search: list.filter(item => item.title.toLowerCase().includes(action.payload.toLowerCase()))
+            || [],
+      }
+   ~~~
+   - Valido que el valor que pasamos en la busqueda contenga informacion ya que si esta vacio mantiene el ultimo cambio.
+3. Dentro de una funcion "handleSearch" manejo los datos del input con ayuda del onChange del input y envio los datos al store con ayuda del action.
+   ~~~
+   const handleSearch = event => {
+      props.searchRequest(search);
+   }
+   ~~~
+4. En Home valido que el arroglo search del store esta o no vacio. Si este contien valores muestro solo los items de este con el titulo de resultado, de lo contrario muestro las listas que ya se incluyen.
+   ~~~
+   const Home = ({ myList, trends, originals, search }) => {
+   // ...
+   const isSearch = search.length > 0;
+   // ...
+   <Search isHome />
+   {isSearch
+   ? <Categories title="Resultado" >
+      <Carousel >
+         {search.map(item => 
+         <CarouselItem key={item.id} {...item} />
+         )}
+      </Carousel>
+   </Categories>
+   : categories.map((categorie, i) => list[i]?.length > 0 &&
+   //...
+   originals: state.originals,
+   search: state.search, // Dentro de mapStateToProps();
+   //...
+   ~~~
